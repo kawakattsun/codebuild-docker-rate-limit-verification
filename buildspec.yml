@@ -5,8 +5,9 @@ env:
     AWS_DEFAULT_REGION: ap-northeast-1
     REPOSITORY_NAME: codebuild-docker-rate-limit-verification
   parameter-store:
-    DOCKER_HUB_ID: codebuild/docker_hub_id
-    DOCKER_HUB_PASSWORD: codebuild/docker_hub_password
+    DOCKER_HUB_ID: /CodeBuild/DOCKER_HUB_ID
+    DOCKER_HUB_PASSWORD: /CodeBuild/DOCKER_HUB_PASSWORD
+    REPOSITORY_URI: /CodeBuild/REPOSITORY_URI
 
 phases:
   pre_build:
