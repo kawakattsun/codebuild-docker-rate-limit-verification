@@ -16,9 +16,11 @@ phases:
       - aws ecr get-login-password --region ${AWS_DEFAULT_REGION} | docker login --username AWS --password-stdin ${REPOSITORY_URI}
       - echo Logging in to Docker Hub...
       - echo ${DOCKER_HUB_PASSWORD} | docker login -u ${DOCKER_HUB_ID} --password-stdin
+      - echo Pulling latest docker image...
+      - docker pull ${REPOSITORY_URI}/${REPOSITORY_NAME}:latest
   build:
     commands:
       - echo Docker build and push to Amazon ECR...
-      - docker build -t ${REPOSITORY_NAME} .
+      - docker build --cache-from ${REPOSITORY_URI}/${REPOSITORY_NAME}:latest -t ${REPOSITORY_NAME} .
       - docker tag ${REPOSITORY_NAME}:latest ${REPOSITORY_URI}/${REPOSITORY_NAME}:latest
       - docker push ${REPOSITORY_URI}/${REPOSITORY_NAME}:latest
