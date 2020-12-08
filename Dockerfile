@@ -1,4 +1,4 @@
-FROM golang:1.15.6-buster as build
+FROM public.ecr.aws/bitnami/golang:1.14.12-debian-10-r11 as build
 WORKDIR /go/src/app
 ADD . /go/src/app
 RUN go build -o /go/bin/app
